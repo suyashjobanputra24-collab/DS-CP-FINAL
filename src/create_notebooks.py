@@ -12,12 +12,26 @@ def make_notebook(title: str, description: str, code_cells: list, dest_path: str
     nb.cells = [
         nbf.v4.new_markdown_cell(f"# {title}\n\n**MD3135 Data Science Project: PromiseGuard**  \n**Authors**: Suyash Jobanputra & Shreyash Jobanputra (Project ID: MDM-DS-039)  \n**Guide**: Dr. Kapil N. Vhatkar  \n\n---\n\n{description}")
     ]
+    setup_code = (
+        "import os\n"
+        "import sys\n"
+        "# Ensure project root is in working directory and sys.path\n"
+        "if os.path.basename(os.getcwd()) == 'notebooks':\n"
+        "    os.chdir('..')\n"
+        "if '.' not in sys.path:\n"
+        "    sys.path.insert(0, '.')\n"
+    )
+    first = True
     for cell in code_cells:
         if isinstance(cell, tuple):
             nb.cells.append(nbf.v4.new_markdown_cell(cell[0]))
-            nb.cells.append(nbf.v4.new_code_cell(cell[1]))
+            cell_code = (setup_code + "\n" + cell[1]) if first else cell[1]
+            first = False
+            nb.cells.append(nbf.v4.new_code_cell(cell_code))
         else:
-            nb.cells.append(nbf.v4.new_code_cell(cell))
+            cell_code = (setup_code + "\n" + cell) if first else cell
+            first = False
+            nb.cells.append(nbf.v4.new_code_cell(cell_code))
             
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     with open(dest_path, "w") as f:

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Promise-Break Risk Modeling | PromiseGuard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>⚠️ Delivery Promise-Break Risk Modeling</h2>
+  <p>Calibrated classification algorithms detecting whether orders are likely to breach customer-facing delivery promises before delays occur.</p>
+</div>
+
+<!-- Risk KPIs -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-title">Best ROC-AUC</div>
+    <div class="kpi-value">0.9829</div>
+    <div class="kpi-subtext text-primary">HistGradientBoosting Classifier</div>
+  </div>
+  <div class="kpi-card" style="border-left-color: #10B981;">
+    <div class="kpi-title">PR-AUC (Imbalanced Class)</div>
+    <div class="kpi-value">0.8053</div>
+    <div class="kpi-subtext text-success">Base rate is only 6.43% late orders</div>
+  </div>
+  <div class="kpi-card" style="border-left-color: #F59E0B;">
+    <div class="kpi-title">Optimal Threshold (T*)</div>
+    <div class="kpi-value">0.57</div>
+    <div class="kpi-subtext text-warning">Cost-sensitive threshold</div>
+  </div>
+  <div class="kpi-card" style="border-left-color: #6366F1;">
+    <div class="kpi-title">Late Interception Recall</div>
+    <div class="kpi-value">90.68%</div>
+    <div class="kpi-subtext text-primary">399 of 440 delays intercepted</div>
+  </div>
+</div>
+
+<!-- Model Benchmark Comparison Table -->
+<div class="card">
+  <div class="card-header">
+    <h3>📊 Classification Model Benchmark Matrix (Test Set $N = 6,838$)</h3>
+  </div>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Model Architecture</th>
+          <th>Decision Threshold</th>
+          <th>ROC-AUC</th>
+          <th>PR-AUC</th>
+          <th>Recall %</th>
+          <th>Precision %</th>
+          <th>Brier Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if risk %}
+          {% for k, v in risk.items() %}
+          <tr {% if 'T*=0.57' in k %}style="background: #F0FDF4; font-weight: 600;"{% endif %}>
+            <td>
+              {% if 'T*=0.57' in k %}<span style="color: #10B981;">★</span> {% endif %}
+              <strong>{{ k }}</strong>
+            </td>
+            <td><code>{{ v.threshold }}</code></td>
+            <td><strong>{{ v.test_roc_auc }}</strong></td>
+            <td><strong>{{ v.test_pr_auc }}</strong></td>
+            <td style="color: #10B981;">{{ (v.test_recall * 100)|round(1) }}%</td>
+            <td>{{ (v.test_precision * 100)|round(1) }}%</td>
+            <td>{{ v.test_brier_score }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td>Logistic Regression</td><td>0.50</td><td>0.9412</td><td>0.6814</td><td>78.4%</td><td>46.2%</td><td>0.0482</td></tr>
+          <tr><td>Random Forest Classifier</td><td>0.50</td><td>0.9785</td><td>0.7921</td><td>86.8%</td><td>51.3%</td><td>0.0385</td></tr>
+          <tr style="background: #F0FDF4;"><td>★ HistGradientBoosting (T*=0.57)</td><td>0.57</td><td>0.9829</td><td>0.8053</td><td>90.7%</td><td>54.1%</td><td>0.0346</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Threshold Trade-off Card -->
+<div class="card">
+  <div class="card-header">
+    <h3>🎯 Why a 0.50 Threshold is Not Automatically Optimal</h3>
+  </div>
+  <p style="color: #334155; line-height: 1.7;">
+    In food delivery operations, missing a severe delay is far more costly than sending an unnecessary delay notification. 
+    A customer whose meal arrives 20 minutes late without warning is likely to open a dispute, request refunds, or churn. 
+    By conducting validation-set cost curves, PromiseGuard selected <strong>$T^* = 0.57$</strong>, which achieves <strong>90.7% recall</strong> (catching 399 out of 440 delayed orders) while maintaining a high precision of <strong>54.1%</strong> to avoid customer alert fatigue.
+  </p>
+</div>
+
+<!-- Visual Figures Grid -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+  <div class="card">
+    <div class="card-header"><h3>ROC & Precision-Recall Curves</h3></div>
+    <img src="/reports/figures/promise_risk_roc_pr_curves.png" alt="ROC and PR Curves" style="width: 100%; border-radius: 8px;">
+    <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem;">Demonstrating strong discrimination even under a severe 6.4% positive class imbalance.</p>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Probability Calibration Curve</h3></div>
+    <img src="/reports/figures/promise_risk_calibration_curve.png" alt="Calibration Curve" style="width: 100%; border-radius: 8px;">
+    <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem;">Predicted probabilities closely trace the diagonal ideal line, ensuring risk percentages can be trusted.</p>
+  </div>
+</div>
+{% endblock %}

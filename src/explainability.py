@@ -116,13 +116,13 @@ class ModelExplainer:
 
 ## 1. Permutation Feature Importance (Decrease in Test MAE upon Feature Shuffling)
 
-| Rank | Feature Name | Mean Importance ($\Delta$ MAE in min) | Std Dev | Interpretation |
+| Rank | Feature Name | Mean Importance ($\\\\Delta$ MAE in min) | Std Dev | Interpretation |
 |---|---|---|---|---|
 """
         for rank, (col, data) in enumerate(results["permutation_importance"].items(), 1):
             md += f"| {rank} | `{col}` | **+{data['mean_importance']} min** | ±{data['std_importance']} min | Critical input signal |\n"
 
-        md += """
+        md += r"""
 ---
 
 ## 2. SHAP (Shapley Additive exPlanations) Global Insights
@@ -153,7 +153,7 @@ class ModelExplainer:
         ax.set_yticks(y_pos)
         ax.set_yticklabels(features)
         ax.invert_yaxis()
-        ax.set_xlabel("Mean Decrease in Model Accuracy ($\Delta$ MAE in minutes when shuffled)")
+        ax.set_xlabel(r"Mean Decrease in Model Accuracy ($\Delta$ MAE in minutes when shuffled)")
         ax.set_title("Top 10 Global Features by Permutation Importance (Test Set)")
         plt.tight_layout()
         plt.savefig(os.path.join(self.figures_dir, "explainability_permutation_importance.png"), dpi=300)

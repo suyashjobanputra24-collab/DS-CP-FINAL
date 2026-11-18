@@ -206,7 +206,7 @@ class UncertaintyEstimator:
 ## 3. Academic Findings & Discussion
 1. **Calibration Accuracy**: Both Quantile Gradient Boosting and Conformal Prediction achieve close to the nominal 90% coverage on held-out chronological test data without post-hoc fabrication.
 2. **Sharpness vs Coverage Trade-off**: Quantile Gradient Boosting provides adaptive interval width: orders with low traffic have tighter bounds (~8–10 min), whereas severe traffic and adverse weather yield wider bounds (~14–16 min), reflecting genuine operational uncertainty.
-3. **Finite-Sample Conformal Bound**: Split-conformal calibration delivers a robust, distribution-free interval of approximately point prediction $\pm 6.8$ minutes, providing mathematically sound marginal coverage.
+3. **Finite-Sample Conformal Bound**: Split-conformal calibration delivers a robust, distribution-free interval of approximately point prediction $\\pm 6.8$ minutes, providing mathematically sound marginal coverage.
 """
         with open(os.path.join(self.tables_dir, "UNCERTAINTY_EVALUATION.md"), "w") as f:
             f.write(md)

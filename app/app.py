@@ -493,7 +493,13 @@ elif page == "9. Proactive Intervention Simulator":
 
     user_threshold = st.slider("Select Operational Delay Alert Threshold (T)", min_value=0.10, max_value=0.90, value=0.57, step=0.05)
 
-    sim_res = InterventionSimulator().simulate_all_policies(risk_threshold=user_threshold)
+    # Load pre-computed simulation results from JSON
+    with open("reports/tables/intervention_simulation.json") as f:
+        _sim_full = json.load(f)
+
+    # Find closest threshold in sensitivity data
+    _sens = _sim_full.get("threshold_sensitivity", [])
+    _closest = min(_sens, key=lambda x: abs(x["threshold"] - user_threshold)) if _sens else {}
 
     st.markdown("### Policy Comparison Matrix")
     policy_df = pd.DataFrame([
@@ -506,9 +512,17 @@ elif page == "9. Proactive Intervention Simulator":
             "Precision %": f"{p['precision_pct']}%",
             "Missed Delays (FN)": p["missed_late_orders"]
         }
-        for p in sim_res["policies"]
+        for p in _sim_full.get("policies", [])
     ])
     st.dataframe(policy_df, use_container_width=True)
+
+    if _closest:
+        st.info(
+            f"**At threshold T ≈ {_closest['threshold']:.2f}** | "
+            f"Alerts sent: {_closest['alerts_sent']:,} ({_closest['alert_rate_pct']}%) | "
+            f"Recall: {_closest['recall_pct']}% | Precision: {_closest['precision_pct']}% | "
+            f"Cost Index: {_closest['illustrative_cost_index']}"
+        )
 
     c1, c2 = st.columns(2)
     with c1:

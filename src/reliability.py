@@ -98,12 +98,12 @@ class ReliabilityAnalyzer:
 
 **Evaluation Dataset**: Chronological Held-out Test Set ($N = {summary['overall_test_orders']:,}$ orders)  
 **Overall Performance**: MAE = {summary['overall_mae']} min | RMSE = {summary['overall_rmse']} min | MedAE = {summary['median_absolute_error']} min  
-**Severe Late Errors ($\ge 10$ min late)**: {summary['severe_late_10m_rate_pct']}% of orders  
+**Severe Late Errors ($\\\\ge 10$ min late)**: {summary['severe_late_10m_rate_pct']}% of orders  
 
 ---
 
 ## 1. Directional Prediction Balance
-- **Accurate (within $\pm 2$ min)**: {summary['error_distribution_percentages'].get('Accurate (±2 min)', 0)}%
+- **Accurate (within $\\\\pm 2$ min)**: {summary['error_distribution_percentages'].get('Accurate (±2 min)', 0)}%
 - **Underprediction (Arrived later than predicted)**: {summary['error_distribution_percentages'].get('Underprediction (Arrived Late)', 0)}%
 - **Overprediction (Arrived earlier than predicted)**: {summary['error_distribution_percentages'].get('Overprediction (Arrived Early)', 0)}%
 
@@ -112,13 +112,13 @@ class ReliabilityAnalyzer:
 ## 2. Segment-Level Reliability Breakdowns
 
 ### Road Traffic Density
-| Traffic Condition | Sample Size ($N$) | MAE (min) | RMSE (min) | Underpredict % | Severe Late ($\ge 10$m) % |
+| Traffic Condition | Sample Size ($N$) | MAE (min) | RMSE (min) | Underpredict % | Severe Late ($\\\\ge 10$m) % |
 |---|---|---|---|---|---|
 """
         for k, v in summary["segments"]["traffic"].items():
             md += f"| **{k}** | {v['sample_size']:,} | {v['mae']} | {v['rmse']} | {v['underprediction_pct']}% | {v['severe_late_10m_pct']}% |\n"
 
-        md += """
+        md += r"""
 ### Weather Conditions
 | Weather Condition | Sample Size ($N$) | MAE (min) | RMSE (min) | Underpredict % | Severe Late ($\ge 10$m) % |
 |---|---|---|---|---|---|
@@ -126,7 +126,7 @@ class ReliabilityAnalyzer:
         for k, v in summary["segments"]["weather"].items():
             md += f"| **{k}** | {v['sample_size']:,} | {v['mae']} | {v['rmse']} | {v['underprediction_pct']}% | {v['severe_late_10m_pct']}% |\n"
 
-        md += """
+        md += r"""
 ### Delivery Distance Bands
 | Distance Band | Sample Size ($N$) | MAE (min) | RMSE (min) | Underpredict % | Severe Late ($\ge 10$m) % |
 |---|---|---|---|---|---|

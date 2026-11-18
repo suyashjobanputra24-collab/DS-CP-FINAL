@@ -186,20 +186,36 @@ python src/explainability.py
 python src/intervention_simulator.py
 ```
 
-### 3. Launch the Interactive Streamlit Dashboard
+### 3. Launch the Interactive Website (Primary Web Platform)
 ```bash
-streamlit run app/app.py
+python run_website.py
+# or double-click start_website.bat (Windows)
 ```
-Open your browser at `http://localhost:8501` to interact with:
-- **Live ETA & Uncertainty Predictor**: Enter custom distance, traffic, weather, and courier parameters to observe point predictions alongside calibrated 90% prediction intervals.
-- **Promise Risk Classifier**: View real-time delay probability and operational alert flags.
-- **Intervention Simulator**: Adjust operational decision thresholds ($T$) to visualize trade-offs between false alarms and caught delays.
-- **Interactive EDA & Reliability Charts**: Segment-by-segment drill-downs across urban tiers, weather events, and peak hours.
+Open your browser at **`http://127.0.0.1:8000`** to access the complete multi-page web platform:
+- **Overview & Executive Dashboard**: KPI cards, problem formulation, and 5-layer framework architecture.
+- **Live ETA & Uncertainty Predictor**: Real-time slider controls, point estimates, 90% quantile & conformal prediction intervals, SLA boundary timeline gauge, and proactive delay recommendations.
+- **Operational Reliability & Slices**: Traffic, weather, and distance band MAE/RMSE comparisons and directional error balance.
+- **Uncertainty Quantification**: Quantile Gradient Boosting vs Split-Conformal coverage breakdown.
+- **Promise-Break Risk Classifier**: Benchmark comparison, ROC/PR curves, and cost-optimal threshold ($T^* = 0.57$).
+- **Customer Satisfaction Study**: Real-world FoodHub rating distribution, negative result analysis, and multi-factorial discussion.
+- **Explainable AI (SHAP & Permutation)**: Permutation importance ranking and SHAP summary beeswarm plot.
+- **Proactive Intervention Simulator**: Dynamic interactive slider ($T \in [0.10, 0.90]$) with real-time recalculation of alerts, recall %, precision %, and cost index.
+- **Dataset Audit & Explorer**: Full data dictionary, cleaning log, and test set sample record viewer.
+- **Viva Voce Defense Portal**: Top 10 examiner questions with expandable model answers and 5-minute presentation guide.
+- **Interactive REST API**: Live OpenAPI Swagger documentation at **`http://127.0.0.1:8000/docs`**.
 
-### 4. Run Automated Test Suite
+### 4. Alternative Streamlit Dashboard (Optional)
+If preferred for Python-specific demonstrations, the Streamlit app is also available:
 ```bash
-pytest tests/ -v
+python -m streamlit run app/app.py
 ```
+Accessible at `http://localhost:8501`.
+
+### 5. Run Automated Test Suite
+```bash
+python -m pytest tests/ -v
+```
+All 12 pipeline, data integrity, and web route tests will execute and verify the system end-to-end.
 
 ---
 
