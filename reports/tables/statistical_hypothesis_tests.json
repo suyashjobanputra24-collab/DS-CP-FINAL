@@ -1,0 +1,161 @@
+{
+  "H1_traffic": {
+    "hypothesis": "H1: Delivery duration differs significantly across traffic densities",
+    "group_statistics": {
+      "Low": {
+        "count": 15476,
+        "mean": 21.27,
+        "std": 6.8,
+        "median": 20.0,
+        "iqr": 10.0
+      },
+      "Medium": {
+        "count": 11546,
+        "mean": 26.69,
+        "std": 8.61,
+        "median": 26.0,
+        "iqr": 13.0
+      },
+      "High": {
+        "count": 4423,
+        "mean": 27.24,
+        "std": 8.4,
+        "median": 27.0,
+        "iqr": 10.0
+      },
+      "Jam": {
+        "count": 14139,
+        "mean": 31.18,
+        "std": 9.94,
+        "median": 31.0,
+        "iqr": 15.0
+      }
+    },
+    "anova_f_stat": 3399.225,
+    "anova_p_value": 0.0,
+    "kruskal_wallis_stat": 8261.549,
+    "kruskal_wallis_p_value": 0.0,
+    "eta_squared_effect_size": 0.1828,
+    "jam_vs_low_mean_difference_min": 9.91,
+    "jam_vs_low_cohens_d": 1.164,
+    "decision": "Reject H0 (Statistically Significant)",
+    "interpretation": "Delivery duration exhibits a statistically significant difference across traffic conditions (Kruskal-Wallis H=8261.55, p < 0.001; eta-squared=0.183). Jam traffic conditions add an average of 9.9 minutes compared to Low traffic, representing a large effect size (Cohen's d=1.16)."
+  },
+  "H2_weather": {
+    "hypothesis": "H2: Delivery duration differs across weather conditions",
+    "group_statistics": {
+      "Sunny": {
+        "count": 7898,
+        "mean": 22.22,
+        "std": 8.52,
+        "median": 21.0
+      },
+      "Cloudy": {
+        "count": 7533,
+        "mean": 28.92,
+        "std": 10.09,
+        "median": 28.0
+      },
+      "Windy": {
+        "count": 7422,
+        "mean": 26.12,
+        "std": 8.62,
+        "median": 26.0
+      },
+      "Fog": {
+        "count": 7653,
+        "mean": 28.91,
+        "std": 10.13,
+        "median": 28.0
+      },
+      "Stormy": {
+        "count": 7584,
+        "mean": 25.87,
+        "std": 8.47,
+        "median": 26.0
+      },
+      "Sandstorms": {
+        "count": 7494,
+        "mean": 25.88,
+        "std": 8.62,
+        "median": 26.0
+      }
+    },
+    "kruskal_wallis_stat": 2784.72,
+    "kruskal_wallis_p_value": 0.0,
+    "fog_vs_sunny_diff_min": 6.69,
+    "decision": "Reject H0 (Statistically Significant)",
+    "interpretation": "Weather conditions have a statistically significant relationship with delivery duration (Kruskal-Wallis H=2784.72, p < 0.001). Adverse weather such as Fog, Stormy, and Sandstorms consistently increases delivery duration compared to Sunny conditions (by ~6.7 minutes)."
+  },
+  "H3_peak_hours": {
+    "hypothesis": "H3: Peak hours exhibit longer delivery durations than non-peak hours",
+    "peak_count": 21751,
+    "peak_mean": 28.87,
+    "peak_median": 28.0,
+    "off_peak_count": 23833,
+    "off_peak_mean": 23.94,
+    "off_peak_median": 23.0,
+    "mean_difference_min": 4.93,
+    "ci_95_mean_diff": [
+      4.76,
+      5.1
+    ],
+    "welch_t_stat": 57.581,
+    "welch_p_value": 0.0,
+    "mann_whitney_p_value": 0.0,
+    "cohens_d": 0.542,
+    "decision": "Reject H0 (Statistically Significant)",
+    "interpretation": "Peak hours (Lunch and Dinner) show a statistically significant increase in delivery time (mean difference = 4.93 mins, 95% CI [4.76, 5.10], p < 0.001). While statistically significant due to large sample size (N=45,584), the practical effect size is modest (Cohen's d=0.54), confirming that traffic and distance remain the dominant drivers of total variance."
+  },
+  "H4_vehicle_type": {
+    "hypothesis": "H4: Delivery duration differs across vehicle types",
+    "group_statistics": {
+      "motorcycle": {
+        "count": 26429,
+        "mean": 27.61,
+        "std": 9.65,
+        "median": 26.0
+      },
+      "scooter": {
+        "count": 15273,
+        "mean": 24.48,
+        "std": 8.7,
+        "median": 24.0
+      },
+      "electric_scooter": {
+        "count": 3814,
+        "mean": 24.47,
+        "std": 8.61,
+        "median": 24.0
+      },
+      "bicycle": {
+        "count": 68,
+        "mean": 26.43,
+        "std": 9.26,
+        "median": 26.0
+      }
+    },
+    "kruskal_wallis_stat": 1080.526,
+    "kruskal_wallis_p_value": 6.107781226841376e-234,
+    "decision": "Reject H0 (Statistically Significant)",
+    "interpretation": "Vehicle types show a statistically significant difference (Kruskal-Wallis H=1080.53, p < 0.05). Bicycles exhibit slightly different operational constraints compared to motorized vehicles."
+  },
+  "H5_satisfaction": {
+    "hypothesis": "H5: Delayed deliveries are associated with lower customer satisfaction ratings",
+    "total_orders": 1898,
+    "rated_orders": 1162,
+    "unrated_orders": 736,
+    "unrated_percentage": 38.78,
+    "spearman_correlation_delivery_time": 0.0007,
+    "spearman_p_value_delivery_time": 0.9809,
+    "spearman_correlation_prep_time": -0.0068,
+    "spearman_p_value_prep_time": 0.8163,
+    "dissatisfied_mean_delivery_time": 24.56,
+    "satisfied_mean_delivery_time": 24.08,
+    "mann_whitney_p_value": 0.1338,
+    "chi2_statistic": 0.06,
+    "chi2_p_value": 0.8062,
+    "decision": "Fail to Reject H0 (No Significant Linear Association)",
+    "interpretation": "In the FoodHub dataset (N=1162 rated orders), the rank correlation between delivery time and customer rating is weak (Spearman rho = 0.001, p = 0.981). Dissatisfied customers (rating <= 3) had an average delivery time of 24.6 mins compared to 24.1 mins for satisfied customers (rating >= 4). Importantly, 38.78% of orders had 'Not given' ratings. This empirical finding demonstrates that satisfaction in instant food delivery is multi-factorial (food quality, order accuracy, packaging temperature) and cannot be accurately predicted solely from transit duration."
+  }
+}

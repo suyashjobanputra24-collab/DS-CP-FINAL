@@ -1,0 +1,201 @@
+{
+  "overall_test_orders": 6838,
+  "overall_mae": 3.26,
+  "overall_rmse": 4.08,
+  "median_absolute_error": 2.83,
+  "error_distribution_counts": {
+    "Accurate (\u00b12 min)": 2461,
+    "Overprediction (Arrived Early)": 2302,
+    "Underprediction (Arrived Late)": 2075
+  },
+  "error_distribution_percentages": {
+    "Accurate (\u00b12 min)": 35.99,
+    "Overprediction (Arrived Early)": 33.66,
+    "Underprediction (Arrived Late)": 30.35
+  },
+  "large_error_10m_rate_pct": 1.81,
+  "severe_late_10m_rate_pct": 1.11,
+  "segments": {
+    "traffic": {
+      "High": {
+        "sample_size": 656,
+        "mae": 3.61,
+        "rmse": 4.62,
+        "median_error": -0.42,
+        "underprediction_pct": 30.49,
+        "overprediction_pct": 35.21,
+        "severe_late_10m_pct": 1.98
+      },
+      "Jam": {
+        "sample_size": 2055,
+        "mae": 3.6,
+        "rmse": 4.45,
+        "median_error": -0.26,
+        "underprediction_pct": 32.8,
+        "overprediction_pct": 35.62,
+        "severe_late_10m_pct": 1.7
+      },
+      "Low": {
+        "sample_size": 2439,
+        "mae": 2.77,
+        "rmse": 3.39,
+        "median_error": -0.05,
+        "underprediction_pct": 28.58,
+        "overprediction_pct": 30.38,
+        "severe_late_10m_pct": 0.21
+      },
+      "Medium": {
+        "sample_size": 1688,
+        "mae": 3.41,
+        "rmse": 4.29,
+        "median_error": -0.31,
+        "underprediction_pct": 29.86,
+        "overprediction_pct": 35.43,
+        "severe_late_10m_pct": 1.36
+      }
+    },
+    "weather": {
+      "Cloudy": {
+        "sample_size": 1096,
+        "mae": 2.95,
+        "rmse": 3.78,
+        "median_error": -0.46,
+        "underprediction_pct": 26.37,
+        "overprediction_pct": 32.48,
+        "severe_late_10m_pct": 0.55
+      },
+      "Fog": {
+        "sample_size": 1187,
+        "mae": 3.02,
+        "rmse": 3.8,
+        "median_error": -0.29,
+        "underprediction_pct": 28.14,
+        "overprediction_pct": 31.76,
+        "severe_late_10m_pct": 0.67
+      },
+      "Sandstorms": {
+        "sample_size": 1132,
+        "mae": 3.37,
+        "rmse": 4.27,
+        "median_error": -0.26,
+        "underprediction_pct": 30.3,
+        "overprediction_pct": 32.77,
+        "severe_late_10m_pct": 1.41
+      },
+      "Stormy": {
+        "sample_size": 1115,
+        "mae": 3.27,
+        "rmse": 4.0,
+        "median_error": 0.2,
+        "underprediction_pct": 33.18,
+        "overprediction_pct": 34.17,
+        "severe_late_10m_pct": 0.72
+      },
+      "Sunny": {
+        "sample_size": 1167,
+        "mae": 3.41,
+        "rmse": 4.26,
+        "median_error": -0.2,
+        "underprediction_pct": 31.45,
+        "overprediction_pct": 36.68,
+        "severe_late_10m_pct": 1.63
+      },
+      "Windy": {
+        "sample_size": 1141,
+        "mae": 3.5,
+        "rmse": 4.33,
+        "median_error": -0.09,
+        "underprediction_pct": 32.6,
+        "overprediction_pct": 34.09,
+        "severe_late_10m_pct": 1.67
+      }
+    },
+    "distance": {
+      "Short (1-5km)": {
+        "sample_size": 1710,
+        "mae": 3.0,
+        "rmse": 3.79,
+        "median_error": -0.13,
+        "underprediction_pct": 28.95,
+        "overprediction_pct": 30.76,
+        "severe_late_10m_pct": 0.82
+      },
+      "Medium (5-9km)": {
+        "sample_size": 1711,
+        "mae": 3.37,
+        "rmse": 4.34,
+        "median_error": -0.38,
+        "underprediction_pct": 30.04,
+        "overprediction_pct": 34.19,
+        "severe_late_10m_pct": 1.87
+      },
+      "Long (9-14km)": {
+        "sample_size": 1708,
+        "mae": 3.35,
+        "rmse": 4.08,
+        "median_error": -0.06,
+        "underprediction_pct": 32.26,
+        "overprediction_pct": 33.49,
+        "severe_late_10m_pct": 0.64
+      },
+      "Far (>14km)": {
+        "sample_size": 1709,
+        "mae": 3.31,
+        "rmse": 4.09,
+        "median_error": -0.28,
+        "underprediction_pct": 30.13,
+        "overprediction_pct": 36.22,
+        "severe_late_10m_pct": 1.11
+      }
+    },
+    "peak_hour": {
+      "0": {
+        "sample_size": 3527,
+        "mae": 3.06,
+        "rmse": 3.83,
+        "median_error": -0.18,
+        "underprediction_pct": 29.17,
+        "overprediction_pct": 32.61,
+        "severe_late_10m_pct": 0.79
+      },
+      "1": {
+        "sample_size": 3311,
+        "mae": 3.47,
+        "rmse": 4.33,
+        "median_error": -0.25,
+        "underprediction_pct": 31.59,
+        "overprediction_pct": 34.79,
+        "severe_late_10m_pct": 1.45
+      }
+    },
+    "city": {
+      "Metropolitian": {
+        "sample_size": 5327,
+        "mae": 3.28,
+        "rmse": 4.11,
+        "median_error": -0.14,
+        "underprediction_pct": 30.88,
+        "overprediction_pct": 33.58,
+        "severe_late_10m_pct": 1.16
+      },
+      "Semi-Urban": {
+        "sample_size": 25,
+        "mae": 2.35,
+        "rmse": 3.41,
+        "median_error": 0.57,
+        "underprediction_pct": 32.0,
+        "overprediction_pct": 12.0,
+        "severe_late_10m_pct": 0.0
+      },
+      "Urban": {
+        "sample_size": 1486,
+        "mae": 3.19,
+        "rmse": 3.99,
+        "median_error": -0.46,
+        "underprediction_pct": 28.4,
+        "overprediction_pct": 34.32,
+        "severe_late_10m_pct": 0.94
+      }
+    }
+  }
+}

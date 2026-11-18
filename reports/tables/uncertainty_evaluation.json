@@ -1,0 +1,85 @@
+{
+  "nominal_coverage_target_pct": 90,
+  "test_sample_size": 6838,
+  "quantile_gradient_boosting": {
+    "observed_coverage_pct": 87.34,
+    "average_interval_width_min": 12.74,
+    "median_interval_width_min": 12.6,
+    "under_interval_miss_pct": 6.62,
+    "over_interval_miss_pct": 6.04
+  },
+  "split_conformal_prediction": {
+    "calibration_sample_size": 6838,
+    "conformal_half_width_min": 6.52,
+    "observed_coverage_pct": 90.33,
+    "average_interval_width_min": 13.04,
+    "under_interval_miss_pct": 4.17,
+    "over_interval_miss_pct": 5.5
+  },
+  "segment_coverage": {
+    "traffic": {
+      "High": {
+        "sample_size": 656,
+        "quantile_coverage_pct": 85.98,
+        "conformal_coverage_pct": 84.15,
+        "avg_width_min": 13.28
+      },
+      "Jam": {
+        "sample_size": 2055,
+        "quantile_coverage_pct": 88.27,
+        "conformal_coverage_pct": 86.96,
+        "avg_width_min": 13.93
+      },
+      "Low": {
+        "sample_size": 2439,
+        "quantile_coverage_pct": 86.39,
+        "conformal_coverage_pct": 95.74,
+        "avg_width_min": 10.82
+      },
+      "Medium": {
+        "sample_size": 1688,
+        "quantile_coverage_pct": 88.09,
+        "conformal_coverage_pct": 89.04,
+        "avg_width_min": 13.85
+      }
+    },
+    "weather": {
+      "Cloudy": {
+        "sample_size": 1096,
+        "quantile_coverage_pct": 88.14,
+        "conformal_coverage_pct": 92.97,
+        "avg_width_min": 12.6
+      },
+      "Fog": {
+        "sample_size": 1187,
+        "quantile_coverage_pct": 86.27,
+        "conformal_coverage_pct": 92.08,
+        "avg_width_min": 12.29
+      },
+      "Sandstorms": {
+        "sample_size": 1132,
+        "quantile_coverage_pct": 87.72,
+        "conformal_coverage_pct": 88.43,
+        "avg_width_min": 12.91
+      },
+      "Stormy": {
+        "sample_size": 1115,
+        "quantile_coverage_pct": 88.16,
+        "conformal_coverage_pct": 91.75,
+        "avg_width_min": 12.78
+      },
+      "Sunny": {
+        "sample_size": 1167,
+        "quantile_coverage_pct": 86.98,
+        "conformal_coverage_pct": 89.46,
+        "avg_width_min": 12.75
+      },
+      "Windy": {
+        "sample_size": 1141,
+        "quantile_coverage_pct": 86.85,
+        "conformal_coverage_pct": 87.38,
+        "avg_width_min": 13.12
+      }
+    }
+  }
+}
