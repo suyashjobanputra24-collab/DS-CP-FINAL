@@ -1,0 +1,18 @@
+[project]
+name = "promiseguard-enterprise"
+version = "3.2.0"
+description = "Autonomous Delivery SLA Defense & Predictive ETA Intelligence Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.pyrefly]
+search-path = [
+    ".",
+    "src",
+    "website",
+    "app",
+    "tests"
+]
+
+[tool.pyrefly.errors]
+missing-import = "ignore"

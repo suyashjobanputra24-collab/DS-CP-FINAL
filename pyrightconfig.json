@@ -1,0 +1,18 @@
+{
+  "include": [
+    "app",
+    "src",
+    "website",
+    "tests"
+  ],
+  "extraPaths": [
+    ".",
+    "src",
+    "website",
+    "app",
+    "tests"
+  ],
+  "typeCheckingMode": "off",
+  "reportMissingImports": "none",
+  "reportMissingTypeStubs": "none"
+}

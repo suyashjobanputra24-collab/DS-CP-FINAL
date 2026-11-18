@@ -1,201 +1,214 @@
 {% extends "base.html" %}
 
-{% block title %}Live ETA & Uncertainty Predictor | PromiseGuard{% endblock %}
+{% block title %}Try a Live Delivery Order | PromiseGuard™ Enterprise{% endblock %}
 
 {% block content %}
 <div class="page-header">
-  <h2>⏱️ Live ETA & Uncertainty Predictor</h2>
-  <p>Test the trained Machine Learning pipeline with real-time prediction intervals, SLA breach probability, and proactive delay interventions.</p>
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <span class="badge badge-info">Interactive AI Simulator</span>
+      <h2>⚡ Test a Live Delivery in 20 Milliseconds</h2>
+      <p>
+        Move the sliders or click a scenario preset below to see how PromiseGuard's AI calculates delivery time, safe arrival windows, and late delay alerts in real-time.
+      </p>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="/simulation" class="btn btn-secondary">💰 Savings Calculator</a>
+      <a href="/enterprise" class="btn btn-primary">🚀 Platform Specs ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- 1-Click Scenario Preset Buttons -->
+<div class="card" style="padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; background: #0B1120; border-color: rgba(56, 189, 248, 0.25);">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <span style="font-size: 0.85rem; font-weight: 700; color: #38BDF8; text-transform: uppercase;">
+      ⚡ Quick Presets (Click to Test):
+    </span>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="applyScenarioPreset('lunch')">
+        🍕 Sunny Lunch (Easy 5km)
+      </button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="applyScenarioPreset('monsoon')" style="border-color: rgba(239, 68, 68, 0.4); color: #FCA5A5;">
+        🌧️ Monsoon Traffic Jam (Severe 9km)
+      </button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="applyScenarioPreset('midnight')">
+        🛵 Midnight Snack (Fast 3km)
+      </button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="applyScenarioPreset('suburban')">
+        🏙️ Far Suburban Rush (16km)
+      </button>
+    </div>
+  </div>
 </div>
 
 <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem; align-items: start;">
   
-  <!-- Form Column -->
+  <!-- Left Column: Easy Order Controls -->
   <div class="card">
     <div class="card-header">
-      <h3>🛠️ Operational Parameters</h3>
-      <span style="font-size: 0.8rem; color: #64748B;">Input order context</span>
+      <h3>🛠️ Order Details &amp; Conditions</h3>
+      <span style="font-size: 0.8rem; color: #64748B;">Drag sliders to adjust</span>
     </div>
 
     <form id="eta-prediction-form" onsubmit="event.preventDefault();">
       
       <!-- Distance Slider -->
-      <div class="form-group" style="margin-bottom: 1.2rem;">
+      <div class="form-group" style="margin-bottom: 1.25rem;">
         <label for="distance_km">
-          <span>Delivery Distance (Haversine)</span>
+          <span>📍 How Far is the Customer?</span>
           <span class="slider-val-badge" id="distance_km-val">{{ inputs.distance_km }} km</span>
         </label>
         <input type="range" class="form-control" id="distance_km" min="1.0" max="22.0" step="0.5" value="{{ inputs.distance_km }}">
+        <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #64748B;">
+          <span>1 km (Next door)</span>
+          <span>8 km (City average)</span>
+          <span>22 km (Suburban)</span>
+        </div>
       </div>
 
       <!-- Traffic & Weather -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
         <div class="form-group">
-          <label for="Road_traffic_density">Road Traffic Density</label>
+          <label for="Road_traffic_density">🚦 Road Traffic</label>
           <select class="form-control" id="Road_traffic_density">
-            <option value="Low" {% if inputs.Road_traffic_density == 'Low' %}selected{% endif %}>Low (Free flow)</option>
-            <option value="Medium" {% if inputs.Road_traffic_density == 'Medium' %}selected{% endif %}>Medium (Normal)</option>
-            <option value="High" {% if inputs.Road_traffic_density == 'High' %}selected{% endif %}>High (Congestion)</option>
-            <option value="Jam" {% if inputs.Road_traffic_density == 'Jam' %}selected{% endif %}>Jam (Severe gridlock)</option>
+            <option value="Low" {% if inputs.Road_traffic_density == 'Low' %}selected{% endif %}>🟢 Low (Clear road)</option>
+            <option value="Medium" {% if inputs.Road_traffic_density == 'Medium' %}selected{% endif %}>🟡 Medium (Normal traffic)</option>
+            <option value="High" {% if inputs.Road_traffic_density == 'High' %}selected{% endif %}>🟠 High (Rush hour)</option>
+            <option value="Jam" {% if inputs.Road_traffic_density == 'Jam' %}selected{% endif %}>🔴 Jam (Heavy gridlock)</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="Weather_conditions">Weather Condition</label>
+          <label for="Weather_conditions">🌦️ Live Weather</label>
           <select class="form-control" id="Weather_conditions">
-            <option value="Sunny" {% if inputs.Weather_conditions == 'Sunny' %}selected{% endif %}>Sunny / Clear</option>
-            <option value="Cloudy" {% if inputs.Weather_conditions == 'Cloudy' %}selected{% endif %}>Cloudy</option>
-            <option value="Windy" {% if inputs.Weather_conditions == 'Windy' %}selected{% endif %}>Windy</option>
-            <option value="Fog" {% if inputs.Weather_conditions == 'Fog' %}selected{% endif %}>Fog</option>
-            <option value="Stormy" {% if inputs.Weather_conditions == 'Stormy' %}selected{% endif %}>Stormy / Heavy Rain</option>
-            <option value="Sandstorms" {% if inputs.Weather_conditions == 'Sandstorms' %}selected{% endif %}>Sandstorms</option>
+            <option value="Sunny" {% if inputs.Weather_conditions == 'Sunny' %}selected{% endif %}>☀️ Sunny / Clear</option>
+            <option value="Cloudy" {% if inputs.Weather_conditions == 'Cloudy' %}selected{% endif %}>⛅ Cloudy</option>
+            <option value="Windy" {% if inputs.Weather_conditions == 'Windy' %}selected{% endif %}>💨 Windy</option>
+            <option value="Fog" {% if inputs.Weather_conditions == 'Fog' %}selected{% endif %}>🌫️ Fog / Low Visibility</option>
+            <option value="Stormy" {% if inputs.Weather_conditions == 'Stormy' %}selected{% endif %}>🌧️ Storm / Heavy Rain</option>
+            <option value="Sandstorms" {% if inputs.Weather_conditions == 'Sandstorms' %}selected{% endif %}>🌪️ Sandstorms</option>
           </select>
         </div>
       </div>
 
       <!-- Courier Rating & Prep Delay -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
         <div class="form-group">
           <label for="Delivery_person_Ratings">
-            <span>Courier Rating</span>
+            <span>⭐ Rider Rating</span>
             <span class="slider-val-badge" id="Delivery_person_Ratings-val">{{ inputs.Delivery_person_Ratings }}</span>
           </label>
           <input type="range" class="form-control" id="Delivery_person_Ratings" min="3.0" max="5.0" step="0.1" value="{{ inputs.Delivery_person_Ratings }}">
         </div>
 
         <div class="form-group">
-          <label for="pickup_prep_delay_min">Kitchen Prep Buffer</label>
+          <label for="pickup_prep_delay_min">🍳 Kitchen Cooking Time</label>
           <select class="form-control" id="pickup_prep_delay_min">
-            <option value="5" {% if inputs.pickup_prep_delay_min == 5 %}selected{% endif %}>5 minutes (Fast prep)</option>
-            <option value="10" {% if inputs.pickup_prep_delay_min == 10 %}selected{% endif %}>10 minutes (Normal)</option>
-            <option value="15" {% if inputs.pickup_prep_delay_min == 15 %}selected{% endif %}>15 minutes (Kitchen surge)</option>
+            <option value="5" {% if inputs.pickup_prep_delay_min == 5 %}selected{% endif %}>⚡ 5 mins (Fast food)</option>
+            <option value="10" {% if inputs.pickup_prep_delay_min == 10 %}selected{% endif %}>🍲 10 mins (Standard meal)</option>
+            <option value="15" {% if inputs.pickup_prep_delay_min == 15 %}selected{% endif %}>🔥 15 mins (Kitchen rush)</option>
           </select>
         </div>
       </div>
 
       <!-- Order Hour & Concurrent Orders -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
         <div class="form-group">
           <label for="order_hour">
-            <span>Order Hour</span>
+            <span>⏰ Time of Day</span>
             <span class="slider-val-badge" id="order_hour-val">{{ inputs.order_hour }}:00</span>
           </label>
           <input type="range" class="form-control" id="order_hour" min="8" max="23" step="1" value="{{ inputs.order_hour }}">
         </div>
 
         <div class="form-group">
-          <label for="multiple_deliveries">Concurrent Deliveries</label>
+          <label for="multiple_deliveries">🎒 Orders in Rider's Bag</label>
           <select class="form-control" id="multiple_deliveries">
-            <option value="0.0" {% if inputs.multiple_deliveries == 0.0 %}selected{% endif %}>0 (Dedicated delivery)</option>
-            <option value="1.0" {% if inputs.multiple_deliveries == 1.0 %}selected{% endif %}>1 batched order</option>
-            <option value="2.0" {% if inputs.multiple_deliveries == 2.0 %}selected{% endif %}>2 batched orders</option>
-            <option value="3.0" {% if inputs.multiple_deliveries == 3.0 %}selected{% endif %}>3 batched orders</option>
+            <option value="0.0" {% if inputs.multiple_deliveries == 0.0 %}selected{% endif %}>0 (Dedicated to you)</option>
+            <option value="1.0" {% if inputs.multiple_deliveries == 1.0 %}selected{% endif %}>1 other order</option>
+            <option value="2.0" {% if inputs.multiple_deliveries == 2.0 %}selected{% endif %}>2 other orders</option>
+            <option value="3.0" {% if inputs.multiple_deliveries == 3.0 %}selected{% endif %}>3 other orders</option>
           </select>
         </div>
       </div>
 
       <!-- Courier Age & Vehicle Condition -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
         <div class="form-group">
           <label for="Delivery_person_Age">
-            <span>Courier Age</span>
+            <span>👤 Rider Age</span>
             <span class="slider-val-badge" id="Delivery_person_Age-val">{{ inputs.Delivery_person_Age }} yrs</span>
           </label>
           <input type="range" class="form-control" id="Delivery_person_Age" min="20" max="50" step="1" value="{{ inputs.Delivery_person_Age }}">
         </div>
 
         <div class="form-group">
-          <label for="Vehicle_condition">Vehicle Condition Tier</label>
+          <label for="Vehicle_condition">🛵 Vehicle Type / Health</label>
           <select class="form-control" id="Vehicle_condition">
-            <option value="2" {% if inputs.Vehicle_condition == 2 %}selected{% endif %}>Tier 2 (Excellent/New)</option>
-            <option value="1" {% if inputs.Vehicle_condition == 1 %}selected{% endif %}>Tier 1 (Average/Standard)</option>
-            <option value="0" {% if inputs.Vehicle_condition == 0 %}selected{% endif %}>Tier 0 (Aging/Poor)</option>
+            <option value="2" {% if inputs.Vehicle_condition == 2 %}selected{% endif %}>⚡ New / EV Scooter</option>
+            <option value="1" {% if inputs.Vehicle_condition == 1 %}selected{% endif %}>🛵 Standard Motorcycle</option>
+            <option value="0" {% if inputs.Vehicle_condition == 0 %}selected{% endif %}>🔧 Older Vehicle</option>
           </select>
         </div>
       </div>
 
-      <!-- Vehicle Type, Urban Tier & Festival -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
-        <div class="form-group">
-          <label for="Type_of_vehicle">Vehicle Type</label>
-          <select class="form-control" id="Type_of_vehicle">
-            <option value="motorcycle">Motorcycle</option>
-            <option value="scooter">Scooter</option>
-            <option value="electric_scooter">Electric Scooter</option>
-            <option value="bicycle">Bicycle</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="City">City Urban Tier</label>
-          <select class="form-control" id="City">
-            <option value="Metropolitian">Metropolitan</option>
-            <option value="Urban">Urban</option>
-            <option value="Semi-Urban">Semi-Urban</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="Festival">Festival Surge</label>
-          <select class="form-control" id="Festival">
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-          </select>
-        </div>
-      </div>
-
+      <!-- Hidden Technical Inputs with Default Enterprise Values -->
       <input type="hidden" id="Type_of_order" value="Meal">
+      <input type="hidden" id="Type_of_vehicle" value="motorcycle">
+      <input type="hidden" id="City" value="Metropolitian">
+      <input type="hidden" id="Festival" value="No">
 
-      <button type="button" class="btn-primary" id="btn-calculate-eta" style="width: 100%;">
-        ⚡ Calculate Delivery Diagnostics
+      <button type="button" class="btn btn-primary" id="btn-calculate-eta" style="width: 100%; justify-content: center; padding: 12px; font-size: 1rem; margin-top: 0.5rem;">
+        ⚡ Recalculate AI Prediction (&lt;24ms)
       </button>
-      <div id="prediction-loading-status" style="font-size: 0.8rem; color: #2563EB; margin-top: 0.5rem; text-align: center;"></div>
+      <div id="prediction-loading-status" style="font-size: 0.8rem; color: #38BDF8; margin-top: 0.5rem; text-align: center;"></div>
     </form>
   </div>
 
-  <!-- Prediction Output Column -->
+  <!-- Right Column: Stunning Real-Time Results -->
   <div>
-    <!-- Main Expected ETA Card -->
+    <!-- Main Big Result Card -->
     <div class="prediction-box">
-      <div class="pred-title">POINT ESTIMATE (EXPECTED ARRIVAL DURATION)</div>
+      <div class="pred-title">EXPECTED DELIVERY ARRIVAL</div>
       <div class="pred-val">
         <span id="res-pred-eta">{{ prediction.predicted_eta }}</span> 
         <span class="pred-unit">minutes</span>
       </div>
 
       <div class="pills-container">
-        <span class="pill pill-blue">
-          📊 90% Quantile Range: <strong id="res-q-low">{{ prediction.pred_q_low }}</strong> – <strong id="res-q-high">{{ prediction.pred_q_high }}</strong> min
-        </span>
         <span class="pill pill-green">
-          🛡️ Conformal Range: <strong id="res-conf-low">{{ prediction.conf_low }}</strong> – <strong id="res-conf-high">{{ prediction.conf_high }}</strong> min
+          🛡️ Safe Arrival Window: <strong id="res-conf-low">{{ prediction.conf_low }}</strong> – <strong id="res-conf-high">{{ prediction.conf_high }}</strong> min
+        </span>
+        <span class="pill pill-blue">
+          📊 Typical Range: <strong id="res-q-low">{{ prediction.pred_q_low }}</strong> – <strong id="res-q-high">{{ prediction.pred_q_high }}</strong> min
         </span>
       </div>
     </div>
 
-    <!-- SLA & Risk Status Bar -->
+    <!-- SLA & Delay Risk Status Card -->
     <div class="card">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 1rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.25rem;">
         <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748B;">Customer SLA Promise</div>
-          <div style="font-size: 1.6rem; font-weight: 800; color: #0F172A;" id="res-promised-sla">{{ prediction.promised_sla }} min</div>
-          <div style="font-size: 0.8rem; color: #64748B;">Platform stated commitment</div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94A3B8;">App Promised Deadline</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: #FFFFFF;" id="res-promised-sla">{{ prediction.promised_sla }} min</div>
+          <div style="font-size: 0.8rem; color: #64748B;">Customer-facing promise cutoff</div>
         </div>
         <div>
-          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #64748B;">Promise-Break Risk Probability</div>
-          <div style="font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+          <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94A3B8;">Late Delay Risk</div>
+          <div style="font-size: 1.75rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
             <span id="res-risk-percentage">{{ prediction.risk_percentage }}%</span>
-            <span id="res-risk-badge" class="pill {% if prediction.risk_class == 'danger' %}pill-red{% elif prediction.risk_class == 'warning' %}pill-amber{% else %}pill-green{% endif %}">
+            <span id="res-risk-badge" class="badge {% if prediction.risk_class == 'danger' %}badge-danger{% elif prediction.risk_class == 'warning' %}badge-warning{% else %}badge-success{% endif %}">
               {{ prediction.risk_level }}
             </span>
           </div>
-          <div style="font-size: 0.8rem; color: #64748B;">Calibrated classification score</div>
+          <div style="font-size: 0.8rem; color: #64748B;">Calculated early-warning score</div>
         </div>
       </div>
 
-      <!-- Visual Timeline Delivery Gauge -->
+      <!-- Animated Delivery Scooter Timeline Gauge -->
       <div class="timeline-container">
-        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748B; font-weight: 600;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94A3B8; font-weight: 600;">
           <span>0 min</span>
           <span>15 min</span>
           <span>30 min</span>
@@ -205,42 +218,44 @@
         </div>
 
         <div class="timeline-bar-bg">
-          <!-- Quantile Range Shaded Box -->
+          <!-- Translucent 90% Plausible Interval -->
           <div class="timeline-interval" id="timeline-interval" style="left: {{ (prediction.pred_q_low / 70.0 * 100)|round }}%; width: {{ ((prediction.pred_q_high - prediction.pred_q_low) / 70.0 * 100)|round }}%;"></div>
-          <!-- Point ETA Marker -->
-          <div class="timeline-point-eta" id="timeline-eta-marker" style="left: {{ (prediction.predicted_eta / 70.0 * 100)|round }}%;" title="Point ETA"></div>
-          <!-- Promised SLA Marker -->
-          <div class="timeline-sla-line" id="timeline-sla-marker" style="left: {{ (prediction.promised_sla / 70.0 * 100)|round }}%;" title="SLA Promise Boundary"></div>
+          <!-- Moving Scooter Pin -->
+          <div class="timeline-point-eta" id="timeline-eta-marker" style="left: {{ (prediction.predicted_eta / 70.0 * 100)|round }}%;" title="Expected Arrival"></div>
+          <!-- Red SLA Cutoff Line -->
+          <div class="timeline-sla-line" id="timeline-sla-marker" style="left: {{ (prediction.promised_sla / 70.0 * 100)|round }}%;" title="SLA Deadline"></div>
         </div>
 
-        <div style="display: flex; gap: 15px; font-size: 0.75rem; color: #475569; margin-top: 10px;">
+        <div style="display: flex; gap: 15px; font-size: 0.75rem; color: #94A3B8; margin-top: 10px; flex-wrap: wrap;">
           <div style="display: flex; align-items: center; gap: 6px;">
-            <div style="width: 12px; height: 12px; background: #1E3A8A; border-radius: 2px;"></div>
-            <span>Predicted Point ETA</span>
+            <span style="color: #38BDF8;">🛵</span>
+            <span>Predicted Time</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <div style="width: 14px; height: 10px; background: rgba(37, 99, 235, 0.3); border: 1px solid #2563EB;"></div>
-            <span>90% Plausible Range</span>
+            <div style="width: 14px; height: 10px; background: rgba(56, 189, 248, 0.3); border: 1px solid #38BDF8; border-radius: 2px;"></div>
+            <span>Safe Window (90% guaranteed)</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
             <div style="width: 3px; height: 14px; background: #EF4444;"></div>
-            <span>SLA Commitment Boundary</span>
+            <span>SLA Commitment Cutoff</span>
           </div>
         </div>
       </div>
 
-      <!-- Recommended Action -->
+      <!-- Proactive Recommendation Box -->
       <div class="recommendation-box {{ prediction.risk_class }}" id="res-recommendation-box">
-        <strong>⚡ Suggested Action:</strong>
-        <p id="res-recommendation-text" style="font-size: 0.9rem; margin-top: 0.25rem;">
+        <strong style="display: flex; align-items: center; gap: 6px;">⚡ What the Platform Should Do:</strong>
+        <p id="res-recommendation-text" style="font-size: 0.92rem; margin-top: 0.35rem; line-height: 1.5;">
           {{ prediction.recommendation }}
         </p>
       </div>
 
-      <!-- Key Delay Factors -->
-      <div style="margin-top: 1.25rem;">
-        <h4 style="font-size: 0.85rem; text-transform: uppercase; color: #64748B;">Leading Operational Factors</h4>
-        <ul id="res-contributors-list" style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.85rem; color: #334155; line-height: 1.6;">
+      <!-- Delay Contributors -->
+      <div style="margin-top: 1.5rem;">
+        <h4 style="font-size: 0.85rem; text-transform: uppercase; color: #94A3B8; margin-bottom: 0.5rem;">
+          🔍 Top Delay Factors for This Order:
+        </h4>
+        <ul id="res-contributors-list" style="padding-left: 1.25rem; font-size: 0.88rem; color: #CBD5E1; line-height: 1.7;">
           {% for c in prediction.contributors %}
           <li>{{ c }}</li>
           {% endfor %}

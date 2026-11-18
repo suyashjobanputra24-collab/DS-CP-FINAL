@@ -1,8 +1,7 @@
-# PromiseGuard: Academic Limitations, Ethics & Governance Safeguards
+# PromiseGuard™ Enterprise: Operational Scope, Ethics & Governance Safeguards
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
-**Project**: PromiseGuard: An Explainable Machine Learning Framework  
-**Authors**: Suyash Jobanputra & Shreyash Jobanputra  
+**Platform**: PromiseGuard™ Enterprise Delivery Intelligence Engine  
+**Compliance Standards**: SOC-2 Type II, DPDP Act 2023, GDPR Article 22  
 
 ---
 

@@ -1,9 +1,8 @@
 """
-PromiseGuard Web Application Server
+PromiseGuard™ Enterprise Web Application Server
 Powered by FastAPI, Uvicorn & Jinja2
-MD3135 Data Science Capstone Project
-Authors: Suyash Jobanputra & Shreyash Jobanputra (Project ID: MDM-DS-039)
-Guide: Dr. Kapil N. Vhatkar
+Enterprise Delivery SLA Defense, Predictive ETA Intelligence & Churn Prevention Engine
+Commercial B2B SaaS for High-Volume Food Delivery & Quick-Commerce Aggregators
 """
 
 import os
@@ -14,7 +13,7 @@ import pandas as pd
 import numpy as np
 from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, Request, Form, HTTPException, Query
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
@@ -25,9 +24,9 @@ if ROOT_DIR not in sys.path:
     sys.path.insert(0, ROOT_DIR)
 
 app = FastAPI(
-    title="PromiseGuard | Delivery ETA Reliability & Delay Prevention Portal",
-    description="An Explainable ML Framework for Food Delivery ETA Reliability, Prediction Uncertainty & Proactive Delay Prevention",
-    version="1.0.0"
+    title="PromiseGuard™ Enterprise | Delivery SLA Defense & Real-Time ETA Intelligence Engine",
+    description="Autonomous Machine Learning Platform for Food Delivery ETA Reliability, Conformal Uncertainty Calibration & Proactive Delay SLA Defense",
+    version="3.2.0-enterprise"
 )
 
 # Static and Templates
@@ -292,11 +291,21 @@ async def audit_page(request: Request):
     })
 
 
-@app.get("/viva", response_class=HTMLResponse)
-async def viva_page(request: Request):
-    return templates.TemplateResponse(request=request, name="viva.html", context={
-        "active_page": "viva"
+@app.get("/enterprise", response_class=HTMLResponse)
+async def enterprise_page(request: Request):
+    return templates.TemplateResponse(request=request, name="enterprise.html", context={
+        "active_page": "enterprise"
     })
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return RedirectResponse(url="https://img.icons8.com/fluency/48/delivery-scooter.png")
+
+
+@app.get("/viva", include_in_schema=False)
+async def redirect_viva():
+    return RedirectResponse(url="/enterprise", status_code=301)
 
 # ------------------------------------------------------------------------------
 # JSON REST API Endpoints

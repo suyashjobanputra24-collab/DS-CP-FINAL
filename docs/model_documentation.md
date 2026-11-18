@@ -1,6 +1,6 @@
 # PromiseGuard: Model Architecture, Training & Performance Documentation
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
+**Platform**: PromiseGuard™ Enterprise Delivery Intelligence Engine  
 **Artifact Directory**: `models/`  
 **Dataset Split**: Chronological Split ($N_{\text{train}} = 31,908$, $N_{\text{val}} = 6,838$, $N_{\text{test}} = 6,838$)  
 

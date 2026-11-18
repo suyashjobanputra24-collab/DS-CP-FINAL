@@ -23,7 +23,7 @@ def test_web_routes_render(client):
         "/explainability",
         "/simulation",
         "/audit",
-        "/viva",
+        "/enterprise",
     ]
     for route in routes:
         response = client.get(route)

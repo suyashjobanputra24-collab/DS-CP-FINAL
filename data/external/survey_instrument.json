@@ -1,8 +1,8 @@
 {
-  "title": "PromiseGuard Food Delivery ETA Experience and Customer Satisfaction Survey",
-  "course": "MD3135 Data Science Project",
-  "institution": "Third Year Computer Engineering",
-  "ethical_disclaimer": "This survey is conducted purely for academic research purposes. No personally identifiable information (such as names, phone numbers, or residential addresses) is collected or retained. Participation is completely voluntary.",
+  "title": "PromiseGuard Enterprise Delivery ETA Experience & Customer Satisfaction Survey",
+  "product": "PromiseGuard Enterprise Logistics Intelligence",
+  "scope": "Customer Experience & Retention Telemetry Benchmark",
+  "ethical_disclaimer": "This survey evaluates customer experience benchmarks for on-demand logistics platforms. No personally identifiable information (such as names, phone numbers, or residential addresses) is collected or retained.",
   "questions": [
     {
       "id": "Q1",

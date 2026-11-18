@@ -1,6 +1,6 @@
 """
-PromiseGuard: Data Loader and Ingestion Audit Module
-Academic Project: MD3135 Data Science | Third Year Computer Engineering
+PromiseGuard™ Enterprise: Data Loader and Ingestion Audit Module
+Engineered for: Zomato, Swiggy, Zepto, Blinkit & DoorDash Fleet Telemetry
 """
 
 import os

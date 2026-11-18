@@ -1,6 +1,7 @@
 # PromiseGuard: Comprehensive Data Dictionary & Schema Specification
 
-**Project**: PromiseGuard (MD3135 Third Year Data Science)  
+**Platform**: PromiseGuard™ Enterprise v3.2.0  
+**Target Fleet Implementations**: Zomato, Swiggy, Zepto, Blinkit, DoorDash  
 **Datasets**:
 1. Operational Delivery Dataset (`data/raw/delivery_operations.csv`)
 2. Customer Experience Dataset (`data/raw/foodhub_order.csv`)

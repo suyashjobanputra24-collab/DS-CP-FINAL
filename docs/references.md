@@ -1,6 +1,7 @@
 # PromiseGuard: Academic Bibliography & References
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
+**Platform**: PromiseGuard™ Enterprise Delivery Intelligence Engine  
+**Subject Area**: Machine Learning for Quick Commerce Logistics & Uncertainty Quantification  
 
 ---
 

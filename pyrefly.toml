@@ -1,0 +1,10 @@
+search-path = [
+    ".",
+    "src",
+    "website",
+    "app",
+    "tests"
+]
+
+[errors]
+missing-import = "ignore"

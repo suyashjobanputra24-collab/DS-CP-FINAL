@@ -1,0 +1,21 @@
+{
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "none",
+    "reportMissingTypeStubs": "none"
+  },
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/src",
+    "${workspaceFolder}/website",
+    "${workspaceFolder}/app",
+    "${workspaceFolder}/tests"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/src",
+    "${workspaceFolder}/website",
+    "${workspaceFolder}/app",
+    "${workspaceFolder}/tests"
+  ]
+}

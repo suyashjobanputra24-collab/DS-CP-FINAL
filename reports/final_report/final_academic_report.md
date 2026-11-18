@@ -1,10 +1,9 @@
-# PromiseGuard: An Explainable Machine Learning Framework for Food Delivery ETA Reliability, Customer Dissatisfaction Analytics and Proactive Delay Prevention
+# PromiseGuard™ Enterprise: Technical Architecture & Machine Learning Whitepaper
+## Autonomous Delivery SLA Defense, Conformal Uncertainty Calibration & Churn Prevention Engine
 
-**Academic Project Final Report | MD3135 Data Science**  
-**Third Year Computer Engineering | Academic Year 2026–27**  
-**Project ID**: MDM-DS-039  
-**Authors**: Suyash Jobanputra & Shreyash Jobanputra  
-**Project Guide**: Dr. Kapil N. Vhatkar  
+**Enterprise Logistics Intelligence Whitepaper**  
+**Target Fleet Implementations**: Zomato, Swiggy, Zepto, Blinkit, DoorDash  
+**Platform Version**: v3.2.0-enterprise  
 
 ---
 

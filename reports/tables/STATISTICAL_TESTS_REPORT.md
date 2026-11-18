@@ -1,8 +1,8 @@
 # PromiseGuard: Consolidated Statistical Hypothesis Testing Report
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
-**Academic Significance Level**: $\alpha = 0.05$  
-**Report Type**: Formal Inferential Statistics and Hypothesis Evaluation  
+**Platform**: PromiseGuard™ Enterprise Delivery Intelligence Engine  
+**Significance Level**: $\alpha = 0.05$  
+**Report Type**: Formal Empirical Inferential Statistics & Fleet Hypothesis Evaluation  
 
 ---
 

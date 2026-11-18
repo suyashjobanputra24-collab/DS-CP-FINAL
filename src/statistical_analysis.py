@@ -9,7 +9,6 @@ import json
 import pandas as pd
 import numpy as np
 from scipy import stats
-import statsmodels.api as sm
 
 
 class StatisticalInference:
@@ -291,8 +290,8 @@ class StatisticalInference:
     def _format_markdown_report(self, res: dict) -> str:
         md = f"""# PromiseGuard: Consolidated Statistical Hypothesis Testing Report
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
-**Academic Significance Level**: $\\alpha = 0.05$  
+**Platform**: PromiseGuard™ Enterprise Delivery Intelligence Engine  
+**Significance Level**: $\\alpha = 0.05$  
 **Report Type**: Formal Inferential Statistics and Hypothesis Evaluation  
 
 ---

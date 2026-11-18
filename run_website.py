@@ -1,9 +1,8 @@
 """
-PromiseGuard Website Launcher
-Runs the complete FastAPI & Jinja2 interactive Web platform on http://127.0.0.1:8000
-MD3135 Data Science Capstone Project
-Authors: Suyash Jobanputra & Shreyash Jobanputra (Project ID: MDM-DS-039)
-Guide: Dr. Kapil N. Vhatkar
+PromiseGuard™ Enterprise: Web Application & Fleet Console Launcher
+Runs the complete FastAPI & Jinja2 enterprise web platform on http://127.0.0.1:8000
+Real-Time Stream Inference, Conformal Uncertainty & Autonomous SLA Defense Engine
+Ready for Fleet Deployment: Zomato • Swiggy • Zepto • Blinkit • DoorDash
 """
 
 import os
@@ -18,16 +17,15 @@ def open_browser():
     webbrowser.open("http://127.0.0.1:8000")
 
 def main():
-    print("=" * 75)
-    print("  🛡️  PROMISEGUARD: INTERACTIVE DATA SCIENCE WEB PLATFORM")
-    print("  Third Year Computer Engineering | MD3135 Data Science (AY 2026-27)")
-    print("  Project ID: MDM-DS-039 | Guide: Dr. Kapil N. Vhatkar")
-    print("  Authors: Suyash Jobanputra & Shreyash Jobanputra")
-    print("=" * 75)
-    print("\n  Starting PromiseGuard Web Server...")
-    print("  🌐 Website URL : http://127.0.0.1:8000")
-    print("  ⚡ Interactive REST API Docs : http://127.0.0.1:8000/docs")
-    print("\n  Opening website in your browser automatically...\n")
+    print("=" * 78)
+    print("  🛡️  PROMISEGUARD™ ENTERPRISE: AUTONOMOUS DELIVERY SLA DEFENSE PLATFORM")
+    print("  High-Volume Logistics Intelligence Engine (v3.2.0-enterprise)")
+    print("  Engineered for: Zomato • Swiggy • Zepto • Blinkit • DoorDash")
+    print("=" * 78)
+    print("\n  Starting PromiseGuard Enterprise Web Server...")
+    print("  🌐 Enterprise Console URL  : http://127.0.0.1:8000")
+    print("  ⚡ Interactive OpenAPI Docs : http://127.0.0.1:8000/docs")
+    print("\n  Opening console in your browser automatically...\n")
     print("  Press Ctrl+C in terminal to stop the server.\n")
 
     # Open browser automatically in background thread

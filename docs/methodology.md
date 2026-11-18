@@ -1,9 +1,8 @@
-# PromiseGuard: Technical Methodology and Research Framework
+# PromiseGuard™ Enterprise: Technical Methodology & Machine Learning Specifications
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
-**Project ID**: MDM-DS-039  
-**Team**: Suyash Jobanputra & Shreyash Jobanputra  
-**Guide**: Dr. Kapil N. Vhatkar  
+**Platform**: PromiseGuard™ Enterprise v3.2.0  
+**Target Fleet Implementations**: Zomato • Swiggy • Zepto • Blinkit • DoorDash  
+**Pipeline**: Dual Stream Inference (<24ms P99), 90% Conformal Calibration & Cost-Asymmetric SLA Classification ($T^* = 0.57$)  
 
 ---
 

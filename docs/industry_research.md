@@ -1,7 +1,7 @@
 # PromiseGuard: Industry Context and Literature Review
 
-**Course**: MD3135 Data Science | Third Year Computer Engineering  
-**Subject Area**: Delivery Logistics, Machine Learning, Uncertainty Estimation & Explainability  
+**Enterprise Solution**: PromiseGuard™ Enterprise Delivery Intelligence  
+**Focus**: Delivery Logistics, Real-Time ML, Conformal Uncertainty Calibration & Proactive Margin Defense  
 
 ---
 

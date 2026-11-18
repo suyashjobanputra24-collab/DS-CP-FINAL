@@ -10,7 +10,7 @@ import nbformat as nbf
 def make_notebook(title: str, description: str, code_cells: list, dest_path: str):
     nb = nbf.v4.new_notebook()
     nb.cells = [
-        nbf.v4.new_markdown_cell(f"# {title}\n\n**MD3135 Data Science Project: PromiseGuard**  \n**Authors**: Suyash Jobanputra & Shreyash Jobanputra (Project ID: MDM-DS-039)  \n**Guide**: Dr. Kapil N. Vhatkar  \n\n---\n\n{description}")
+        nbf.v4.new_markdown_cell(f"# {title}\n\n**PromiseGuard™ Enterprise: Autonomous Delivery SLA Defense Engine**  \n**Platform**: Enterprise Machine Learning Pipeline (v3.2.0)  \n**Clients**: Zomato • Swiggy • Zepto • Blinkit • DoorDash  \n\n---\n\n{description}")
     ]
     setup_code = (
         "import os\n"
