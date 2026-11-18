@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Proactive Intervention Simulator | PromiseGuard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>🎯 Proactive Delay Intervention Simulator</h2>
+  <p>Offline simulation of operational response policies: balancing customer notification volume against missed late deliveries.</p>
+</div>
+
+<!-- Interactive Threshold Tuning Card -->
+<div class="card" style="background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%); border-left: 6px solid #2563EB;">
+  <div class="card-header" style="background: transparent;">
+    <h3>🎛️ Dynamic Operational Alert Threshold (T) Tuning</h3>
+    <span class="slider-val-badge" id="sim-threshold-val" style="font-size: 1rem; padding: 4px 12px;">0.57</span>
+  </div>
+  <p style="color: #475569; font-size: 0.95rem; margin-bottom: 1rem;">
+    Drag the slider to test different risk alerting thresholds ($T$) on the held-out test set ($N = 6,838$ orders). See the real-time operational trade-offs:
+  </p>
+  <input type="range" class="form-control" id="sim-threshold-slider" min="0.10" max="0.90" step="0.05" value="0.57" style="height: 10px; cursor: pointer;">
+  
+  <!-- Dynamic Reactive KPI Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+    <div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+      <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">ALERTS SENT</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #1E293B;" id="sim-alerts-sent">737 (10.8%)</div>
+      <div style="font-size: 0.75rem; color: #64748B;">Platform alert volume</div>
+    </div>
+    <div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+      <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">DELAYS CAUGHT (RECALL)</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #10B981;" id="sim-recall">90.68%</div>
+      <div style="font-size: 0.75rem; color: #059669;" id="sim-delays-captured">399 of 440 delayed orders</div>
+    </div>
+    <div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+      <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">ALERT PRECISION</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #2563EB;" id="sim-precision">54.14%</div>
+      <div style="font-size: 0.75rem; color: #64748B;">True late / All alerts</div>
+    </div>
+    <div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+      <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">MISSED DELAYS</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #EF4444;" id="sim-missed-delays">41</div>
+      <div style="font-size: 0.75rem; color: #DC2626;">Only 9.3% missed late</div>
+    </div>
+    <div style="background: #FFFFFF; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+      <div style="font-size: 0.75rem; color: #64748B; font-weight: 700;">COST INDEX</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: #7C3AED;" id="sim-cost-index">748</div>
+      <div style="font-size: 0.75rem; color: #6D28D9;">Illustrative cost metric</div>
+    </div>
+  </div>
+</div>
+
+<!-- Policy Comparison Matrix Table -->
+<div class="card">
+  <div class="card-header">
+    <h3>📋 Policy Comparison Matrix: 4 Evaluated Operational Strategies</h3>
+  </div>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Strategy</th>
+          <th>Alert Volume</th>
+          <th>Delays Intercepted (TP)</th>
+          <th>Recall %</th>
+          <th>False Alarms (FP)</th>
+          <th>Precision %</th>
+          <th>Missed Delays (FN)</th>
+          <th>Operational Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if simulation and simulation.policies %}
+          {% for p in simulation.policies %}
+          <tr {% if 'T=0.57' in p.policy_name %}style="background: #F0FDF4; font-weight: 600;"{% endif %}>
+            <td>
+              {% if 'T=0.57' in p.policy_name %}<span style="color: #10B981;">★</span> {% endif %}
+              <strong>{{ p.policy_name }}</strong><br>
+              <span style="font-size: 0.75rem; color: #64748B;">{{ p.description }}</span>
+            </td>
+            <td>{{ "{:,}".format(p.orders_flagged) }} ({{ p.alert_rate_pct }}%)</td>
+            <td style="color: #10B981; font-weight: 700;">{{ p.true_late_captured }}</td>
+            <td style="color: #10B981; font-weight: 700;">{{ p.recall_pct }}%</td>
+            <td>{{ p.false_alarms }}</td>
+            <td>{{ p.precision_pct }}%</td>
+            <td style="color: #EF4444; font-weight: 700;">{{ p.missed_late_orders }}</td>
+            <td style="font-size: 0.8rem; color: #475569;">{{ p.operational_load }}</td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr><td>Policy A: Fixed Promise</td><td>0 (0%)</td><td>0</td><td>0%</td><td>0</td><td>0%</td><td>440</td><td>Zero dispatch overhead; high churn</td></tr>
+          <tr style="background: #F0FDF4;"><td>★ Policy B: Threshold (T=0.57)</td><td>737 (10.8%)</td><td>399</td><td>90.7%</td><td>338</td><td>54.1%</td><td>41</td><td>Moderate notifications; catches 91% delays</td></tr>
+          <tr><td>Policy C: Interval-Aware</td><td>3,080 (45%)</td><td>129</td><td>29.3%</td><td>2,951</td><td>4.2%</td><td>311</td><td>Transparent ranges upfront</td></tr>
+          <tr><td>Policy D: Human Review (Top 10%)</td><td>684 (10%)</td><td>388</td><td>88.2%</td><td>296</td><td>56.7%</td><td>52</td><td>Dispatcher queue for intervention</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Visual Figures Grid -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+  <div class="card">
+    <div class="card-header"><h3>Policy Trade-Off Curve (Recall vs False Alert Rate)</h3></div>
+    <img src="/reports/figures/simulator_tradeoff_curve.png" alt="Trade-off Curve" style="width: 100%; border-radius: 8px;">
+    <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem;">Shows the steep frontier where a modest alert volume of 10% captures >90% of all delayed deliveries.</p>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Illustrative Operational Cost Curve</h3></div>
+    <img src="/reports/figures/simulator_cost_curve.png" alt="Cost Curve" style="width: 100%; border-radius: 8px;">
+    <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.5rem;">Demonstrates the minimum cost point achieved near $T^* = 0.57$, penalizing missed delays $10\times$ more than false alerts.</p>
+  </div>
+</div>
+{% endblock %}

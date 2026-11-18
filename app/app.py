@@ -8,6 +8,22 @@ Guide: Dr. Kapil N. Vhatkar
 import os
 import sys
 sys.path.insert(0, os.path.abspath("."))
+
+# If executed directly with 'python app/app.py', automatically bootstrap streamlit run
+if __name__ == "__main__":
+    try:
+        from streamlit.runtime import exists
+        if not exists():
+            import subprocess
+            print("=" * 70)
+            print("  🛡️  PROMISEGUARD: STARTING STREAMLIT APPLICATION...")
+            print("  🌐 Opening dashboard in your browser...")
+            print("=" * 70)
+            cmd = [sys.executable, "-m", "streamlit", "run", os.path.abspath(__file__)]
+            subprocess.run(cmd)
+            sys.exit(0)
+    except Exception:
+        pass
 import json
 import joblib
 import streamlit as st

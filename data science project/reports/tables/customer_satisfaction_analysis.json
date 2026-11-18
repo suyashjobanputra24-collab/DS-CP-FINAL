@@ -1,0 +1,120 @@
+{
+  "total_orders": 1898,
+  "rated_orders": 1162,
+  "unrated_orders": 736,
+  "unrated_percentage": 38.78,
+  "rating_distribution": {
+    "Not given": 736,
+    "5": 588,
+    "4": 386,
+    "3": 188
+  },
+  "mean_rating": 4.34,
+  "median_rating": 5.0,
+  "std_rating": 0.74,
+  "satisfied_count_4_5": 974,
+  "dissatisfied_count_3": 188,
+  "dissatisfaction_rate_pct": 16.18,
+  "operational_relationships": {
+    "delivery_time_by_rating": {
+      "mean": {
+        "3.0": 24.55851063829787,
+        "4.0": 23.867875647668395,
+        "5.0": 24.212585034013607
+      },
+      "median": {
+        "3.0": 25.0,
+        "4.0": 24.0,
+        "5.0": 25.0
+      },
+      "std": {
+        "3.0": 4.652844787316623,
+        "4.0": 4.923376957963976,
+        "5.0": 5.018607093238155
+      }
+    },
+    "prep_time_by_rating": {
+      "mean": {
+        "3.0": 27.430851063829788,
+        "4.0": 27.39637305699482,
+        "5.0": 27.35544217687075
+      },
+      "median": {
+        "3.0": 27.0,
+        "4.0": 27.0,
+        "5.0": 27.5
+      },
+      "std": {
+        "3.0": 4.768491204010565,
+        "4.0": 4.620776041608247,
+        "5.0": 4.693812772051084
+      }
+    },
+    "total_turnaround_by_rating": {
+      "mean": {
+        "3.0": 51.98936170212766,
+        "4.0": 51.26424870466321,
+        "5.0": 51.56802721088435
+      },
+      "median": {
+        "3.0": 52.0,
+        "4.0": 51.0,
+        "5.0": 51.0
+      },
+      "std": {
+        "3.0": 6.432695031306717,
+        "4.0": 6.682997739393496,
+        "5.0": 6.927745725516952
+      }
+    }
+  },
+  "models": {
+    "logistic_regression": {
+      "roc_auc": 0.4615,
+      "precision_dissatisfied": 0.1348,
+      "recall_dissatisfied": 0.4043,
+      "f1_dissatisfied": 0.2021,
+      "overall_accuracy": 0.4845,
+      "confusion_matrix": {
+        "tn": 19,
+        "fp": 28,
+        "fn": 122,
+        "tp": 122
+      }
+    },
+    "random_forest": {
+      "roc_auc": 0.4331,
+      "precision_dissatisfied": 0.124,
+      "recall_dissatisfied": 0.3191,
+      "f1_dissatisfied": 0.1786,
+      "overall_accuracy": 0.5258,
+      "confusion_matrix": {
+        "tn": 15,
+        "fp": 32,
+        "fn": 106,
+        "tp": 138
+      }
+    }
+  },
+  "logistic_coefficients": {
+    "delivery_time": -0.099,
+    "food_preparation_time": -0.045,
+    "cost_of_the_order": 0.031,
+    "cuisine_type_American": -0.277,
+    "cuisine_type_Chinese": -0.466,
+    "cuisine_type_French": 0.068,
+    "cuisine_type_Indian": 0.785,
+    "cuisine_type_Italian": -0.377,
+    "cuisine_type_Japanese": 0.021,
+    "cuisine_type_Korean": -0.487,
+    "cuisine_type_Mediterranean": -0.856,
+    "cuisine_type_Mexican": 0.046,
+    "cuisine_type_Middle Eastern": 0.558,
+    "cuisine_type_Southern": 0.235,
+    "cuisine_type_Spanish": 0.628,
+    "cuisine_type_Thai": 0.958,
+    "cuisine_type_Vietnamese": -0.788,
+    "day_of_the_week_Weekday": -0.103,
+    "day_of_the_week_Weekend": 0.152
+  }
+}
